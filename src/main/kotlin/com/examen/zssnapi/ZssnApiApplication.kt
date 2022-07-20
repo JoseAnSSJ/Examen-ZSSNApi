@@ -1,10 +1,10 @@
 package com.examen.zssnapi
 
+import com.examen.zssnapi.BD.*
 import com.examen.zssnapi.BD.Tablas.tblReportesInfectados
 import com.examen.zssnapi.BD.Tablas.tblInventario
 import com.examen.zssnapi.BD.Tablas.catObjetos
 import com.examen.zssnapi.BD.Tablas.tblSobrevivientes
-import com.examen.zssnapi.BD.promedioObjetos
 import com.examen.zssnapi.Services.CatObjetosService
 import com.examen.zssnapi.Services.InventarioService
 import com.examen.zssnapi.Services.ReporteInfectadoService
@@ -39,16 +39,16 @@ class SobrevivientesResource(val serviceSobreviventes: SobreviventesService) {
     fun getSobrevivientes(): List<tblSobrevivientes> = serviceSobreviventes.listaSobrevivientes()
 
     @PostMapping("/sobrevivientes/addSobreviviente")
-    fun addSobrevivientes(@RequestBody sobrevivienteRequesst: tblSobrevivientes): tblSobrevivientes  {
+    fun addSobrevivientes(@RequestBody sobrevivienteRequesst: tblSobrevivientes): SobrevivientesResponse {
         return serviceSobreviventes.agregarSobreviviente(sobrevivienteRequesst)
     }
     @RequestMapping("/sobrevivientes/getUltimaLocacion")
-    fun getUltimaLocacion(@RequestParam id_sobreviviente: String): tblSobrevivientes  {
+    fun getUltimaLocacion(@RequestParam id_sobreviviente: String): SobrevivientesResponse  {
         return serviceSobreviventes.getUltimaLocacion(id_sobreviviente)
     }
 
     @RequestMapping("/sobrevivientes/updateUltimaLocacion")
-    fun updateUltimaLocacion(@RequestParam id_sobreviviente: String,@RequestParam latitud: String,@RequestParam longitud: String): Int  {
+    fun updateUltimaLocacion(@RequestParam id_sobreviviente: String,@RequestParam latitud: String,@RequestParam longitud: String): okResponse  {
         return serviceSobreviventes.updateUltimaLocacion(id_sobreviviente,latitud,longitud)
     }
 
@@ -56,15 +56,15 @@ class SobrevivientesResource(val serviceSobreviventes: SobreviventesService) {
     fun getSobrevivientesNoInfectados(): List<tblSobrevivientes> = serviceSobreviventes.listaSobrevivientesNoInfectados()
 
     @RequestMapping("/sobrevivientes/updateInfectado")
-    fun updateInfectado(@RequestParam id_sobreviviente: String): Int  {
+    fun updateInfectado(@RequestParam id_sobreviviente: String): okResponse  {
         return serviceSobreviventes.updateInfectado(id_sobreviviente)
     }
 
     @GetMapping("/sobrevivientes/getPorcentajeInfectados")
-    fun getPorcentajeInfectados(): Double = serviceSobreviventes.getPorcentajeInfectados()
+    fun getPorcentajeInfectados(): PorcentajeResonse = serviceSobreviventes.getPorcentajeInfectados()
 
     @GetMapping("/sobrevivientes/getPorcentajeBien")
-    fun getPorcentajeBien(): Double = serviceSobreviventes.getPorcentajeBien()
+    fun getPorcentajeBien(): PorcentajeResonse = serviceSobreviventes.getPorcentajeBien()
 
 }
 @RestController
@@ -76,7 +76,7 @@ class CatObjetosResource(val catObjetos: CatObjetosService) {
 @RestController
 class InventarioResource(val serviceInventarioService: InventarioService) {
     @PostMapping("/inventario/addInventario")
-    fun addInventario(@RequestBody inventarioRequesst: tblInventario): tblInventario {
+    fun addInventario(@RequestBody inventarioRequesst: tblInventario): okResponse {
         return serviceInventarioService.agregarInventario(inventarioRequesst)
     }
 
@@ -99,7 +99,7 @@ class InventarioResource(val serviceInventarioService: InventarioService) {
     }
 
     @GetMapping("/inventario/getPuntosPerdidios")
-    fun getPuntosPerdidios(): Int {
+    fun getPuntosPerdidios(): okResponse {
         return serviceInventarioService.getPuntosPerdidios()
     }
 
@@ -108,7 +108,7 @@ class InventarioResource(val serviceInventarioService: InventarioService) {
 @RestController
 class ReporteInfectadoResource(val reporteInfectadoService: ReporteInfectadoService) {
     @PostMapping("/reporteInfectado/addInfectado")
-    fun agregarReporteInfectado(@RequestBody reporteInfectado: tblReportesInfectados): tblReportesInfectados {
+    fun agregarReporteInfectado(@RequestBody reporteInfectado: tblReportesInfectados): ReporteInfectadoResonse {
         return reporteInfectadoService.agregarReporteInfectado(reporteInfectado)
     }
 
