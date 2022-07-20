@@ -47,16 +47,16 @@ class SobrevivientesResource(val serviceSobreviventes: SobreviventesService) {
         return serviceSobreviventes.getUltimaLocacion(id_sobreviviente)
     }
 
-    @PutMapping("/sobrevivientes/updateUltimaLocacion?{id_sobreviviente}?{latitud}?{longitud}")
-    fun updateUltimaLocacion(@PathVariable id_sobreviviente: String,@PathVariable latitud: String,@PathVariable longitud: String): tblSobrevivientes  {
+    @RequestMapping("/sobrevivientes/updateUltimaLocacion")
+    fun updateUltimaLocacion(@RequestParam id_sobreviviente: String,@RequestParam latitud: String,@RequestParam longitud: String): Int  {
         return serviceSobreviventes.updateUltimaLocacion(id_sobreviviente,latitud,longitud)
     }
 
     @GetMapping("/sobrevivientes/getSobrevivientesNoInfectados")
     fun getSobrevivientesNoInfectados(): List<tblSobrevivientes> = serviceSobreviventes.listaSobrevivientesNoInfectados()
 
-    @PutMapping("/sobrevivientes/updateInfectado?{id_sobreviviente}")
-    fun updateInfectado(@PathVariable id_sobreviviente: String): tblSobrevivientes  {
+    @RequestMapping("/sobrevivientes/updateInfectado")
+    fun updateInfectado(@RequestParam id_sobreviviente: String): Int  {
         return serviceSobreviventes.updateInfectado(id_sobreviviente)
     }
 
@@ -80,16 +80,16 @@ class InventarioResource(val serviceInventarioService: InventarioService) {
         return serviceInventarioService.agregarInventario(inventarioRequesst)
     }
 
-    @GetMapping("/inventario/getPromedioById")
-    fun getPromedioById(@PathVariable id_objeto: Int): promedioObjetos {
+    @RequestMapping("/inventario/getPromedioById")
+    fun getPromedioById(@RequestParam id_objeto: Int): promedioObjetos {
         return serviceInventarioService.getPromedioById(id_objeto)
     }
 
-    @PostMapping("/inventario/getPromedio")
+    @GetMapping("/inventario/getPromedio")
     fun getPromedio(): ArrayList<promedioObjetos> {
         var list: ArrayList<promedioObjetos> = arrayListOf()
 
-        for(it in 1..3){
+        for(it in 1..4){
             var item: promedioObjetos = getPromedioById(it)
             list.add(item)
         }

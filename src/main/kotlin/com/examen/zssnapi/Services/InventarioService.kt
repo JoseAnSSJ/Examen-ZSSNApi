@@ -16,5 +16,7 @@ class InventarioService(val bd: InventarioRepository){
 
     fun getPromedioById(id_objeto: Int): promedioObjetos = bd.getPromedioById(id_objeto)
 
-    fun getPuntosPerdidios(): Int = bd.getPuntosPerdidios()
+    fun getPuntosPerdidios(): Int {
+        return bd.getPuntosPerdidios().sum()
+    }
 }

@@ -15,13 +15,13 @@ class SobreviventesService(val bd: SobrevivientesRepository){
         return  bd.getUltimaLocacion(id_sobreviviente)
     }
 
-    fun updateUltimaLocacion(id_sobreviviente: String, latitud: String, longitud: String): tblSobrevivientes{
+    fun updateUltimaLocacion(id_sobreviviente: String, latitud: String, longitud: String): Int{
         return  bd.updateUltimaLocacion(id_sobreviviente,latitud,longitud)
     }
 
     fun listaSobrevivientesNoInfectados(): List<tblSobrevivientes> = bd.listaSobrevivientesNoInfectados()
 
-    fun updateInfectado(id_sobreviviente: String): tblSobrevivientes{
+    fun updateInfectado(id_sobreviviente: String): Int{
         return  bd.updateInfectado(id_sobreviviente)
     }
 

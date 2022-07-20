@@ -2,6 +2,8 @@ package com.examen.zssnapi.Repository
 
 import com.examen.zssnapi.BD.Tablas.tblSobrevivientes
 import org.springframework.data.jdbc.repository.query.Query
+import org.springframework.data.jdbc.repository.QueryMappingConfiguration
+import org.springframework.data.jdbc.repository.query.Modifying
 import org.springframework.data.repository.CrudRepository
 
 interface SobrevivientesRepository: CrudRepository<tblSobrevivientes, String> {
@@ -11,19 +13,21 @@ interface SobrevivientesRepository: CrudRepository<tblSobrevivientes, String> {
     @Query("SELECT latitud,longitud FROM TBLSOBREVIVIENTES WHERE id_sobreviviente = :id_sobreviviente")
     fun getUltimaLocacion(id_sobreviviente: String): tblSobrevivientes
 
-    @Query("UPDATE TBLSOBREVIVIENTES SET latitud =?2 ,longitud=?3 WHERE id_sobreviviente = ?1")
-    fun updateUltimaLocacion(id_sobreviviente: String, latitud: String, longitud: String): tblSobrevivientes
+    @Modifying
+    @Query("UPDATE TBLSOBREVIVIENTES SET latitud =:latitud ,longitud=:longitud WHERE id_sobreviviente = :id_sobreviviente")
+    fun updateUltimaLocacion(id_sobreviviente: String, latitud: String, longitud: String): Int
 
-    @Query("SELECT * FROM TBLSOBREVIVIENTES WHERE es_infectado = 0")
+    @Query("SELECT * FROM TBLSOBREVIVIENTES WHERE es_infectado = false")
     fun listaSobrevivientesNoInfectados(): List<tblSobrevivientes>
 
-    @Query("UPDATE TBLSOBREVIVIENTES SET es_infectado=1 WHERE id_sobreviviente = ?1")
-    fun updateInfectado(id_sobreviviente: String): tblSobrevivientes
+    @Modifying
+    @Query("UPDATE TBLSOBREVIVIENTES SET es_infectado=true WHERE id_sobreviviente =:id_sobreviviente")
+    fun updateInfectado(id_sobreviviente: String): Int
 
-    @Query("SELECT (SELECT COUNT(*) FROM TBLSOBREVIVIENTES WHERE es_infectado = 1)/(SELECT COUNT(*) FROM TBLSOBREVIVIENTES ) * as porcentaje FROM TBLSOBREVIVIENTES")
+    @Query("SELECT TOP 1 ((SELECT COUNT(*) FROM TBLSOBREVIVIENTES WHERE es_infectado = true) * 100) /SELECT COUNT(*) FROM TBLSOBREVIVIENTES as porcentaje FROM TBLSOBREVIVIENTES")
     fun getPorcentajeInfectados(): Double
 
-    @Query("SELECT (SELECT COUNT(*) FROM TBLSOBREVIVIENTES WHERE es_infectado = 0)/(SELECT COUNT(*) FROM TBLSOBREVIVIENTES ) * as porcentaje FROM TBLSOBREVIVIENTES")
+    @Query("SELECT TOP 1 ((SELECT COUNT(*) FROM TBLSOBREVIVIENTES WHERE es_infectado = true) * 100)/SELECT COUNT(*) FROM TBLSOBREVIVIENTES as porcentaje FROM TBLSOBREVIVIENTES")
     fun getPorcentajeBien(): Double
 
 }

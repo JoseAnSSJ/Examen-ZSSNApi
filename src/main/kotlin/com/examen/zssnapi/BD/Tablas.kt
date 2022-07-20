@@ -14,7 +14,7 @@ class Tablas {
     @Table("catObjetos")
     data class catObjetos(val id_objeto: Int, val descripcion: String, val puntos: Int)
 
-    @Table("tblReportesInfectados")
+    @Table("TBLREPORTESINFECTADOS")
     data class tblReportesInfectados(@Id val id_reporte: String?, val id_sobreviviente_infectado: Int, val id_sobreviviente_informante: Int)
 
 
