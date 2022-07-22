@@ -33,6 +33,8 @@ fun main(args: Array<String>) {
 }
 
 
+//Se generan los controladores y se asignan las urls y los tipos de request se van a hacer
+//tambien se anidaron varios servicios para que la app no tuviera que esforzarse mucho
 @RestController
 class SobrevivientesResource(val serviceSobreviventes: SobreviventesService) {
     @GetMapping("/sobrevivientes/getSobrevivientes")

@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 
 class Tablas {
-
+    //Damos de alta todas las tablas
     @Table("TBLSOBREVIVIENTES")
     data class tblSobrevivientes(@Id val id_sobreviviente: String?, val nombre_sobreviviente: String?, val edad: String?, val genero: String?, val latitud: String?, val longitud: String?, val es_infectado: Boolean?)
 

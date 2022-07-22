@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class ReporteInfectadoService(val bd: ReporteInfectadoRepository){
+    //se hace la conexion con los servicios y se modifican las respuestas para que la app pueda recibir solo los datos que necesita
+    //se puede hacer un bd.save para agregar mas facil los datos
     fun listaReporteInfectado(): List<tblReportesInfectados> = bd.listaReporteInfectado()
     fun agregarReporteInfectado(reporteInfectado: tblReportesInfectados): ReporteInfectadoResonse {
         val reporteInfectadoResponse = ReporteInfectadoResonse(

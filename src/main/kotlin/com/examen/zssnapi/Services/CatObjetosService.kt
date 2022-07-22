@@ -6,5 +6,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class CatObjetosService(val bd: CatObjetosRepository){
+    //se hace la conexion con los servicios
     fun listaCatObjetos(): List<catObjetos> = bd.listaCatObjetos()
 }

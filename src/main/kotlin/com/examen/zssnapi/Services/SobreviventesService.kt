@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class SobreviventesService(val bd: SobrevivientesRepository){
+    //se hace la conexion con los servicios y se modifican las respuestas para que la app pueda recibir solo los datos que necesita
+    //se puede hacer un bd.save para agregar mas facil los datos
     fun listaSobrevivientes(): List<tblSobrevivientes> = bd.listaSobrevivientes()
     fun agregarSobreviviente(sobreviviente: tblSobrevivientes):  SobrevivientesResponse{
         val sobrevivientesResponse = SobrevivientesResponse(

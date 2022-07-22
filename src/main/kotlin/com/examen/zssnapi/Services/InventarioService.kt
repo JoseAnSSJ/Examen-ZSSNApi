@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class InventarioService(val bd: InventarioRepository){
+    //se hace la conexion con los servicios y se modifican las respuestas para que la app pueda recibir solo los datos que necesita
+    //se puede hacer un bd.save para agregar mas facil los datos
     fun listaInventario(): List<tblInventario> = bd.listaInventario()
     fun agregarInventario(inventario: tblInventario): okResponse{
         bd.save(inventario)

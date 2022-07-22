@@ -7,6 +7,8 @@ import org.springframework.data.jdbc.repository.query.Modifying
 import org.springframework.data.repository.CrudRepository
 
 interface SobrevivientesRepository: CrudRepository<tblSobrevivientes, String> {
+    //Se crean los querys para consultarlos de la base de datos
+    //Se agrega el Modifying para poder hacer los updates
     @Query("SELECT * FROM TBLSOBREVIVIENTES")
     fun listaSobrevivientes(): List<tblSobrevivientes>
 

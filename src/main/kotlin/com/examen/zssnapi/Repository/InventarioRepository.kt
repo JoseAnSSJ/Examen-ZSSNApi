@@ -9,6 +9,7 @@ import org.springframework.data.jdbc.repository.query.Query
 import org.springframework.data.repository.CrudRepository
 
 interface InventarioRepository : CrudRepository<tblInventario, String> {
+    //Se crean los querys para consultarlos de la base de datos
     @Query("SELECT * FROM tblInventario")
     fun listaInventario(): List<tblInventario>
 
