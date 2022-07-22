@@ -30,4 +30,7 @@ interface SobrevivientesRepository: CrudRepository<tblSobrevivientes, String> {
     @Query("SELECT TOP 1 ((SELECT COUNT(*) FROM TBLSOBREVIVIENTES WHERE es_infectado = false) * 100)/SELECT COUNT(*) FROM TBLSOBREVIVIENTES as porcentaje FROM TBLSOBREVIVIENTES")
     fun getPorcentajeBien(): Double
 
+    @Query("SELECT count(*) FROM tblReportesInfectados where id_sobreviviente_infectado=:id_sobreviviente")
+    fun validaInfectado(id_sobreviviente: Int): Int
+
 }

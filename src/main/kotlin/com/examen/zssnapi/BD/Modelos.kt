@@ -28,3 +28,15 @@ data class ReporteInfectadoResonse(
 data class PorcentajeResonse(
         val porcentaje: String? = null
 )
+
+
+data class InventarioResponse(
+        val descripcion: String? = null,
+        val cantidad: Int? = null
+)
+
+
+
+data class InventarioLista(
+        val inventario: ArrayList<Tablas.tblInventario> = arrayListOf()
+)

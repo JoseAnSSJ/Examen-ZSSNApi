@@ -66,6 +66,16 @@ class SobrevivientesResource(val serviceSobreviventes: SobreviventesService) {
     @GetMapping("/sobrevivientes/getPorcentajeBien")
     fun getPorcentajeBien(): PorcentajeResonse = serviceSobreviventes.getPorcentajeBien()
 
+    @RequestMapping("/sobrevivientes/validaInfectado")
+    fun validaInfectado(@RequestParam id_objeto: Int): Int {
+
+        if(serviceSobreviventes.validaInfectado(id_objeto)>=3){
+            serviceSobreviventes.updateInfectado(id_objeto.toString())
+        }
+
+        return serviceSobreviventes.validaInfectado(id_objeto)
+    }
+
 }
 @RestController
 class CatObjetosResource(val catObjetos: CatObjetosService) {
@@ -78,6 +88,20 @@ class InventarioResource(val serviceInventarioService: InventarioService) {
     @PostMapping("/inventario/addInventario")
     fun addInventario(@RequestBody inventarioRequesst: tblInventario): okResponse {
         return serviceInventarioService.agregarInventario(inventarioRequesst)
+    }
+
+    @GetMapping("/inventario/listaInventario")
+    fun listaInventario(): List<tblInventario> = serviceInventarioService.listaInventario()
+
+
+    @PostMapping("/inventario/addInventarioList")
+    fun addInventarioIndidvidual(@RequestBody inventario: InventarioLista): okResponse {
+
+        for (item in inventario.inventario){
+            addInventario(item)
+        }
+        return okResponse("Ok")
+
     }
 
     @RequestMapping("/inventario/getPromedioById")
@@ -101,6 +125,11 @@ class InventarioResource(val serviceInventarioService: InventarioService) {
     @GetMapping("/inventario/getPuntosPerdidios")
     fun getPuntosPerdidios(): okResponse {
         return serviceInventarioService.getPuntosPerdidios()
+    }
+
+    @RequestMapping("/inventario/getInventarioById")
+    fun getInventarioById(@RequestParam id_sobreviviente: String): List<InventarioResponse> {
+        return serviceInventarioService.getInventarioById(id_sobreviviente)
     }
 
 }

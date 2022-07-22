@@ -69,4 +69,11 @@ class SobreviventesService(val bd: SobrevivientesRepository){
         )
         return porcentajeResonse
     }
+
+
+    fun validaInfectado(id_sobreviviente: Int): Int {
+        return bd.validaInfectado(id_sobreviviente)
+    }
+
+
 }
